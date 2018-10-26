@@ -56,4 +56,4 @@ mvn clean spring-boot:run
 
 - [Axon Hub](http://localhost:8024)
 - [Axon DB](http://localhost:8023)
-- [DS GUI](http://localhost:8080)
+- [GUI](http://localhost:8080)
