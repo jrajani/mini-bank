@@ -8,11 +8,14 @@ import io.blueharvest.labs.axon.common.event.BalanceUpdatedEvent;
 import io.blueharvest.labs.axon.common.event.MoneyDepositedEvent;
 import io.blueharvest.labs.axon.common.event.MoneyWithdrawnEvent;
 import io.blueharvest.labs.axon.common.exception.InsufficientBalanceException;
+import io.blueharvest.labs.axon.common.exception.InvalidAmountException;
+import io.blueharvest.labs.axon.common.exception.InvalidDetailsException;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.springframework.util.StringUtils;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
@@ -26,7 +29,10 @@ public class Account {
     private String accountHolderName;
 
     @CommandHandler
-    public Account(CreateAccountCommand cmd) {
+    public Account(CreateAccountCommand cmd) throws InvalidDetailsException {
+        if(cmd.getAccountId() < 0 || StringUtils.isEmpty(cmd.getAccountHolderName())) {
+            throw new InvalidDetailsException("Account Id or Name is incorrect.");
+        }
         apply(new AccountCreatedEvent(cmd.getAccountId(), cmd.getAccountHolderName()));
     }
 
@@ -39,7 +45,10 @@ public class Account {
     }
 
     @CommandHandler
-    public void handle(DepositMoneyCommand cmd) {
+    public void handle(DepositMoneyCommand cmd) throws InvalidAmountException {
+        if (cmd.getAmount() < 0) {
+            throw new InvalidAmountException("Invalid Amount.");
+        }
         apply(new MoneyDepositedEvent(cmd.getAccountId(), cmd.getTransactionId(), cmd.getAmount(), balance + cmd.getAmount()));
     }
 

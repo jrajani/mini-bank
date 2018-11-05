@@ -69,6 +69,7 @@ public class BankUI extends UI {
             commandGateway.sendAndWait(new DepositMoneyCommand(Integer.parseInt(id.getValue()), UUID.randomUUID().toString(), Integer.parseInt(noOfStudents.getValue())));
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE)
                     .addCloseListener(e -> accountSummaryDataProvider.refreshAll());
+            transactionHistoryDataProvider.refreshAll();
         });
 
         FormLayout form = new FormLayout();
@@ -89,6 +90,7 @@ public class BankUI extends UI {
             commandGateway.sendAndWait(new WithdrawMoneyCommand(Integer.parseInt(id.getValue()), UUID.randomUUID().toString(), Integer.parseInt(noOfStudents.getValue())));
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE)
                     .addCloseListener(e -> accountSummaryDataProvider.refreshAll());
+            transactionHistoryDataProvider.refreshAll();
         });
 
         FormLayout form = new FormLayout();
