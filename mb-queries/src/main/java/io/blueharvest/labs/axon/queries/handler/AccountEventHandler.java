@@ -1,6 +1,5 @@
 package io.blueharvest.labs.axon.queries.handler;
 
-import io.blueharvest.labs.axon.common.command.CreateAccountCommand;
 import io.blueharvest.labs.axon.common.event.AccountCreatedEvent;
 import io.blueharvest.labs.axon.common.event.BalanceUpdatedEvent;
 import io.blueharvest.labs.axon.common.model.AccountSummary;
