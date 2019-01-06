@@ -41,10 +41,6 @@ mvn clean spring-boot:run
 mvn clean spring-boot:run 
 ```
 
-You can verify the setup by opening Axon Hub url. You should see an overview similar to the following image.
- 
-![Axon Hub Overview](./docs/AxonHub-overview.png)
-
 
 7. Start mb-gui
 
@@ -54,6 +50,5 @@ mvn clean spring-boot:run
 
 ## Useful links - Local Server
 
-- [Axon Hub](http://localhost:8024)
-- [Axon DB](http://localhost:8023)
-- [GUI](http://localhost:8080)
+- [Axon Server](http://localhost:8024)
+- [UI](http://localhost:8080)
